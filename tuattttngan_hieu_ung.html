@@ -1,0 +1,32 @@
+<div style="display:flex;align-items:center;justify-content:center;min-height:280px;overflow:hidden;position:relative;background:linear-gradient(135deg,#1a1030,#2a1550,#0f1830);border-radius:16px;padding:2rem 1rem;">
+<style>
+@keyframes floatLetter{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-14px) rotate(-4deg)}50%{transform:translateY(4px) rotate(3deg)}75%{transform:translateY(-8px) rotate(-2deg)}}
+@keyframes hueShift{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
+.letter{display:inline-block;font-family:var(--font-sans);font-size:52px;font-weight:500;background:linear-gradient(90deg,#ff6ec7,#ffd166,#5df2c9,#7f9cf5,#ff6ec7);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:floatLetter 2.4s ease-in-out infinite, hueShift 6s linear infinite;text-shadow:0 0 18px rgba(255,255,255,0.15)}
+.spark{position:absolute;width:6px;height:6px;border-radius:50%;background:#fff;animation:sparkle 1.8s ease-in-out infinite}
+</style>
+<div style="position:relative;text-align:center;z-index:2" id="txt"></div>
+<div id="sparks"></div>
+</div>
+<script>
+const text = "Tuấtttt Ngân";
+const container = document.getElementById('txt');
+[...text].forEach((ch,i)=>{
+  const span = document.createElement('span');
+  span.className='letter';
+  span.textContent = ch === ' ' ? '\u00A0\u00A0' : ch;
+  span.style.animationDelay = (i*0.12)+'s, '+(i*0.3)+'s';
+  container.appendChild(span);
+});
+const sparksEl = document.getElementById('sparks');
+for(let i=0;i<24;i++){
+  const s = document.createElement('div');
+  s.className='spark';
+  s.style.left = Math.random()*100+'%';
+  s.style.top = Math.random()*100+'%';
+  s.style.animationDelay = (Math.random()*2)+'s';
+  s.style.background = ['#ff6ec7','#ffd166','#5df2c9','#7f9cf5','#ffffff'][Math.floor(Math.random()*5)];
+  sparksEl.appendChild(s);
+}
+</script>
